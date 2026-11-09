@@ -1,0 +1,19 @@
+{
+  "name": "missao-astra",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Missão Astra — prática de inglês em um site estático.",
+  "scripts": {
+    "vendor": "node scripts/build-vendor.mjs",
+    "test": "node scripts/test-score.mjs",
+    "check-assets": "node scripts/check-assets.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/nunito": "^5.2.6",
+    "esbuild": "^0.25.5",
+    "puppeteer-core": "^24.10.0",
+    "three": "^0.170.0"
+  }
+}
