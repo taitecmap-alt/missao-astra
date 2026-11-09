@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102047">
+  <meta name="description" content="Missão Astra: jogos curtos para praticar inglês, com a mascote Astra em 3D. Funciona no celular e no computador.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Missão Astra">
+  <meta property="og:title" content="Missão Astra">
+  <meta property="og:description" content="Prática de inglês com a Astra, para celular e computador.">
+  <meta property="og:image" content="https://taitecmap-alt.github.io/missao-astra/img/og.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <title>Missão Astra</title>
+  <link rel="icon" href="icons/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Ir para o conteúdo</a>
+  <div class="sky" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#inicio">
+      <img src="icons/icon-192.png" width="48" height="48" alt="">
+      <span>
+        <strong>Missão Astra</strong>
+        <small>prática de inglês</small>
+      </span>
+    </a>
+    <p class="points" aria-label="Pontos">★ <span id="points">0</span></p>
+  </header>
+  <div class="shell">
+    <nav class="nav" aria-label="Seções">
+      <a class="nav-btn" href="#inicio" data-view="home"><span aria-hidden="true">🏠</span> Início</a>
+      <a class="nav-btn" href="#missoes" data-view="missions"><span aria-hidden="true">🚀</span> Missões</a>
+      <a class="nav-btn" href="#falar" data-view="voice"><span aria-hidden="true">🎤</span> Falar</a>
+      <a class="nav-btn" href="#painel" data-view="parent"><span aria-hidden="true">🛡️</span> Responsável</a>
+    </nav>
+    <main id="main">
+      <section id="view-home">
+        <div class="home-grid">
+          <div class="stage-col">
+            <div class="stage">
+              <canvas id="astra-canvas" width="800" height="600" aria-label="Astra em 3D. Toque nela para ela reagir."></canvas>
+              <p id="astra-bubble" class="bubble" hidden></p>
+              <p id="astra-status" class="status-chip" hidden></p>
+              <p id="tap-hint" class="tap-hint">Toque na Astra</p>
+              <p id="stage-loading" class="stage-loading">Acordando a Astra…</p>
+              <div id="stage-fallback" class="stage-fallback" hidden>
+                <img src="img/astra-avatar.jpg" alt="Astra, mascote da missão">
+                <p>Neste aparelho a Astra em 3D não apareceu. Os jogos funcionam do mesmo jeito.</p>
+              </div>
+            </div>
+          </div>
+          <div class="dash-col">
+            <section class="countdown" aria-label="Contagem para 15 de abril de 2027">
+              <p class="kicker">Inscrição até 15/04/2027</p>
+              <p class="countdown-days"><span id="cd-days">–</span> <span id="cd-days-label">dias</span></p>
+              <p class="countdown-clock" id="cd-clock">–</p>
+            </section>
+            <section class="stats" aria-label="Seu progresso">
+              <article class="stat"><span id="stat-stars">0</span><small>estrelas</small></article>
+              <article class="stat"><span id="stat-level">1</span><small id="stat-level-name">Cadete</small></article>
+              <article class="stat"><span id="stat-streak">0</span><small>dias seguidos</small></article>
+              <article class="stat"><span id="stat-missions">0</span><small>missões</small></article>
+            </section>
+            <p id="streak-note" class="hint">Pratique uma missão hoje para manter a sequência.</p>
+            <p class="lede">A Astra treina com você. Em inglês, uma frase de cada vez.</p>
+            <div class="home-actions">
+              <a class="btn primary" href="#missoes">Ver missões</a>
+              <a class="btn secondary" href="#falar">Falar com a Astra</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-missions" hidden>
+        <h1>Missões</h1>
+        <p class="lede">Cada uma leva poucos minutos. Os pontos ficam neste aparelho.</p>
+        <div class="mission-list">
+          <a class="mission" href="#jogo/frase">
+            <span class="mission-mark" aria-hidden="true">Aa</span>
+            <span><strong>Monte a frase</strong><small>Ordene palavras com I e because it is</small></span>
+            <span class="mission-best" data-best="frase">nova</span>
+          </a>
+          <a class="mission" href="#jogo/ouvir">
+            <span class="mission-mark" aria-hidden="true">♪</span>
+            <span><strong>Ouvir e escolher</strong><small>Ouça a frase e toque na certa</small></span>
+            <span class="mission-best" data-best="ouvir">nova</span>
+          </a>
+          <a class="mission" href="#jogo/conundrum">
+            <span class="mission-mark" aria-hidden="true">?</span>
+            <span><strong>Conundrum</strong><small>I choose … because …</small></span>
+            <span class="mission-best" data-best="conundrum">nova</span>
+          </a>
+          <a class="mission" href="#jogo/vocab">
+            <span class="mission-mark" aria-hidden="true">★</span>
+            <span><strong>Vocabulário</strong><small>Palavras rápidas em inglês</small></span>
+            <span class="mission-best" data-best="vocab">nova</span>
+          </a>
+          <a class="mission" href="#falar">
+            <span class="mission-mark" aria-hidden="true">🎤</span>
+            <span><strong>Fale com a Astra</strong><small>Ouça e repita em voz alta</small></span>
+            <span class="mission-best" data-best="voz">nova</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="view-game" hidden>
+        <p class="back"><a href="#missoes">← Missões</a></p>
+        <div id="game-root"></div>
+      </section>
+
+      <section id="view-voice" hidden>
+        <p class="back"><a href="#inicio">← Início</a></p>
+        <div id="voice-root"></div>
+      </section>
+
+      <section id="view-parent" hidden>
+        <div id="parent-gate" class="panel">
+          <h1>Painel do responsável</h1>
+          <p class="lede">Uma continha rápida, só para não abrir sem querer.</p>
+          <form id="gate-form" class="stack">
+            <label id="gate-label" for="gate-answer">Quanto é ?</label>
+            <input id="gate-answer" name="answer" inputmode="numeric" autocomplete="off" enterkeyhint="done" required>
+            <button class="btn primary" type="submit">Entrar</button>
+            <p id="gate-msg" class="feedback almost" hidden></p>
+          </form>
+        </div>
+        <div id="parent-panel" class="panel" hidden>
+          <h1>Painel do responsável</h1>
+          <p class="lede">Estes dados ficam só neste aparelho. Nada é enviado para a internet. Nenhum nome é guardado: só data, atividade e pontos.</p>
+          <div class="actions">
+            <button id="export-btn" class="btn secondary" type="button">Exportar histórico</button>
+            <button id="reset-btn" class="btn danger" type="button">Apagar dados</button>
+          </div>
+          <div id="history" class="history"></div>
+          <p id="history-empty" class="hint">Ainda não há prática registrada.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <p id="toast" class="toast" hidden role="status"></p>
+  <canvas id="confetti" class="confetti" hidden aria-hidden="true"></canvas>
+  <div id="modal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title"></h2>
+      <p id="modal-body"></p>
+      <div class="actions">
+        <button id="modal-cancel" class="btn secondary" type="button">Cancelar</button>
+        <button id="modal-ok" class="btn danger" type="button">Apagar</button>
+      </div>
+    </div>
+  </div>
+  <noscript>
+    <p class="noscript">A Missão Astra precisa de JavaScript para os jogos e para a Astra em 3D.</p>
+  </noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
